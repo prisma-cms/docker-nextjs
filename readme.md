@@ -30,13 +30,9 @@ cp coturn/turnserver.conf.sample coturn/turnserver.conf
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d mysql
 ```
 
-```
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d prisma
-```
-
 Check this containers been started
 ```
-docker-compose ps mysql prisma
+docker-compose ps mysql
 ```
 
 Start proxy server
@@ -44,17 +40,6 @@ Start proxy server
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d proxy
 ```
 
-Start API-server
-```
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d api
-```
-After try open http://localhost:2016
-
-Start Front-server
-```
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d front
-```
-After try open http://localhost:2015
 
 ### WebRTC services for videochats
 

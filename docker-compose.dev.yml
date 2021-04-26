@@ -2,25 +2,9 @@ version: "3.7"
 
 services:
 
-  prisma:
-    ports:
-      - '4466:4466'
-
   mysql:
     ports:
       - '3306:3306'
-
-  front:
-    volumes:
-      - ./prisma-cms/${SITE:-boilerplate}/src:/www/${SITE:-boilerplate}/src
-    command: bash -c "yarn deploy && yarn start"
-
-  api:
-    volumes:
-      - ./prisma-cms/${SITE:-boilerplate}/src:/www/${SITE:-boilerplate}/src
-    environment: 
-      - SendmailTest=true
-    command: bash -c "yarn deploy && yarn start-server-dev"
 
   proxy:
     ports:

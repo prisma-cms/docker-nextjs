@@ -1,28 +1,6 @@
 version: "3.7"
 
 services:
-  prisma:
-    image: prismagraphql/prisma:1.34
-    # container_name: "prisma"
-    
-    # Uncomment for open ports
-    # ports:
-      # - '4466:4466'
-    environment:
-      PRISMA_CONFIG: |
-        port: 4466
-        databases:
-          default:
-            connector: mysql
-            host: ${MYSQL_HOST:-mysql}
-            port: ${MYSQL_PORT:-3306}
-            # database: ${MYSQL_DB}
-            user: ${MYSQL_USER:-root}
-            password: ${MYSQL_PASSWORD}
-            migrations: ${PRISMA_MIGRATIONS}
-            rawAccess: ${PRISMA_RAW_ACCESS}
-    # depends_on:
-    #   - mysql
 
   mysql:
     image: mysql:5.7
@@ -40,55 +18,6 @@ services:
       UPLOAD_LIMIT: ${PMA_UPLOAD_LIMIT:-100M}
     # depends_on:
     #   - mysql
-
-  front:
-    tty: true
-    build:
-      context: ./prisma-cms
-      network: ${NETWORK_NAME:-prisma-cms-default}
-      args: 
-        - SITE=${SITE:-boilerplate}
-        - ROLE=FRONT
-        - ENV_MODE=development
-        - endpoint=${dev_endpoint}
-    volumes:
-      # - schema:/www/${SITE:-boilerplate}/src/schema
-      # - shared:/www/${SITE:-boilerplate}/shared
-      - ./prisma-cms/${SITE:-boilerplate}/shared:/www/${SITE:-boilerplate}/shared
-      - ./prisma-cms/${SITE:-boilerplate}/uploads:/www/${SITE:-boilerplate}/uploads
-    # environment: 
-    env_file: 
-      - .env
-    environment: 
-      - API_ENDPOINT=${API_ENDPOINT:-http://api:4000}
-      - ENV_MODE=development
-    # entrypoint: /usr/bin/entrypoint-front.sh
-
-  api:
-    tty: true
-    build:
-      context: ./prisma-cms
-      network: ${NETWORK_NAME:-prisma-cms-default}
-      args: 
-        - SITE=${SITE:-boilerplate}
-        - ROLE=API
-        - ENV_MODE=development
-        - endpoint=${dev_endpoint}
-    volumes:
-      # - schema:/www/${SITE:-boilerplate}/src/schema
-      - ./prisma-cms/${SITE:-boilerplate}/uploads:/www/${SITE:-boilerplate}/uploads
-
-      # For any server config files, for example DKIM
-      - ./opt:/opt
-    # depends_on:
-    #   - prisma
-    env_file: 
-      - .env
-    environment: 
-      - API_ENDPOINT=${API_ENDPOINT:-http://api:4000}
-      - endpoint=${dev_endpoint}
-      - GethServer=${ETHEREUM_GATEWAY:-https://cloudflare-eth.com}
-    # entrypoint: /usr/bin/entrypoint-api.sh
 
   # web-server
   proxy:
@@ -134,8 +63,6 @@ services:
 
 volumes:
   mysql:
-  # schema:
-  # shared:
 
 networks:
   default:

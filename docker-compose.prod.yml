@@ -2,35 +2,11 @@ version: "3.7"
 
 services:
 
-  prisma:
-    restart: always
-
   mysql:
     restart: always
 
   pma:
     restart: always
-
-  front:
-    restart: always
-    environment: 
-      ENV_MODE: production
-    build:
-      args: 
-        - PUBLIC_URL=${PUBLIC_URL:-/}
-        - ENV_MODE=production
-        - endpoint=${prod_endpoint}
-    command: yarn start-ssr
-
-  api:
-    restart: always
-    environment: 
-      - endpoint=${prod_endpoint}
-    build:
-      args: 
-        - ENV_MODE=production
-        - endpoint=${prod_endpoint}
-    command: "yarn start-server"
 
   proxy:
     restart: always
