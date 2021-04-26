@@ -1,20 +1,4 @@
 
-0.0.0.0/api/ 0.0.0.0:80/api/ {
-    tls off
-    gzip
-
-    # log   / stdout  "Front API: {upstream} {combined}  UPSTREAM: {upstream} REWRITE: {rewrite_uri} TOKEN: {>X-App-Token} COOKIE:{~AppSession}\n"
- 
-    rewrite /api /
-
-
-    proxy / api:4000 {
-        transparent
-        websocket
-    }
-
-}
-
 0.0.0.0 0.0.0.0:80 {
     tls off
     gzip
@@ -26,18 +10,6 @@
         websocket
         # header_upstream Connection {>Connection}
         # header_upstream Upgrade {>Upgrade}
-    }
-}
-
-0.0.0.0:2016 {
-    tls off
-    gzip
-
-    # log   / stdout  "API: {upstream} {combined}  UPSTREAM: {upstream} REWRITE: {rewrite_uri} TOKEN: {>X-App-Token} COOKIE:{~AppSession}\n"
-
-    proxy / api:4000 {
-        transparent
-        websocket
     }
 }
 
