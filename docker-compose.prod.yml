@@ -16,6 +16,15 @@ services:
       - 80:80
       - 443:443
 
+  nextjs-nexus:
+    restart: always
+    environment: 
+      ENV_MODE: production
+    build:
+      args: 
+        - ENV_MODE=production
+    command: bash -c "yarn start"
+
   rtcmultyconnection:
     restart: always
 

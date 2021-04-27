@@ -30,6 +30,32 @@ services:
   mail:
     image: mailhog/mailhog
 
+
+  nextjs-nexus:
+    tty: true
+    build:
+      context: ./nextjs-nexus
+      network: ${NETWORK_NAME:-prisma-cms-default}
+      args: 
+        - SITE=nextjs-nexus
+        - DATABASE_URL=${NEXTJS_DATABASE_URL}
+        - SUDO_PASSWORD=${NEXTJS_SUDO_PASSWORD}
+      #   - ROLE=FRONT
+      #   - ENV_MODE=development
+      #   - endpoint=${dev_endpoint}
+      #   - API_ENDPOINT=${API_ENDPOINT}
+    volumes:
+      - ./nextjs-nexus/shared:/www/nextjs-nexus/shared
+      - ./nextjs-nexus/uploads:/www/nextjs-nexus/uploads
+    env_file: 
+      - .env
+    environment: 
+      - DATABASE_URL=${NEXTJS_DATABASE_URL}
+      - SUDO_PASSWORD=${NEXTJS_SUDO_PASSWORD}
+    #   - API_ENDPOINT=${API_ENDPOINT:-http://api:4000}
+    #   - ENV_MODE=development
+
+
   rtcmultyconnection:
     tty: true
     build:

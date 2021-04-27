@@ -1,0 +1,4 @@
+[submodule "nextjs-nexus"]
+	path = nextjs-nexus
+	url = https://github.com/prisma-cms/nextjs-nexus
+	branch = master
