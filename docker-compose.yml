@@ -40,6 +40,7 @@ services:
         - SITE=nextjs-nexus
         - DATABASE_URL=${NEXTJS_DATABASE_URL}
         - SUDO_PASSWORD=${NEXTJS_SUDO_PASSWORD}
+        - PWA=${PWA}
       #   - ROLE=FRONT
       #   - ENV_MODE=development
       #   - endpoint=${dev_endpoint}
