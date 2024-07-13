@@ -23,6 +23,9 @@ services:
       - ACME_AGREE=true
     build:
       context: ./caddy
+    volumes:
+      - ./caddy/${CADDY_FILE:-Caddyfile}:/etc/Caddyfile
+
   
   # mail-server
   mail:
