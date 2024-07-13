@@ -16,8 +16,6 @@ services:
       PMA_HOST: ${MYSQL_HOST:-mysql}
       PMA_PORT: ${MYSQL_PORT:-3306}
       UPLOAD_LIMIT: ${PMA_UPLOAD_LIMIT:-100M}
-    # depends_on:
-    #   - mysql
 
   # web-server
   proxy:
@@ -41,10 +39,7 @@ services:
         - DATABASE_URL=${NEXTJS_DATABASE_URL}
         - SUDO_PASSWORD=${NEXTJS_SUDO_PASSWORD}
         - PWA=${PWA}
-      #   - ROLE=FRONT
-      #   - ENV_MODE=development
-      #   - endpoint=${dev_endpoint}
-      #   - API_ENDPOINT=${API_ENDPOINT}
+        - ENV_MODE=development
     volumes:
       - ./nextjs-nexus/shared:/www/nextjs-nexus/shared
       - ./nextjs-nexus/uploads:/www/nextjs-nexus/uploads
@@ -53,8 +48,8 @@ services:
     environment: 
       - DATABASE_URL=${NEXTJS_DATABASE_URL}
       - SUDO_PASSWORD=${NEXTJS_SUDO_PASSWORD}
-    #   - API_ENDPOINT=${API_ENDPOINT:-http://api:4000}
-    #   - ENV_MODE=development
+      - ENV_MODE=development
+    command: bash -c "yarn dev"
 
 
   rtcmultyconnection:

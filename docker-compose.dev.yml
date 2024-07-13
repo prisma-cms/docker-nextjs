@@ -23,16 +23,14 @@ services:
 
   nextjs-nexus:
     volumes:
-      - ./nextjs-nexus/.storybook:/www/nextjs-nexus/.storybook
+      - ./nextjs-nexus/storybook:/www/nextjs-nexus/storybook
       - ./nextjs-nexus/cypress:/www/nextjs-nexus/cypress
       - ./nextjs-nexus/e2e:/www/nextjs-nexus/e2e
       - ./nextjs-nexus/pages:/www/nextjs-nexus/pages
       - ./nextjs-nexus/src:/www/nextjs-nexus/src
       - ./nextjs-nexus/public:/www/nextjs-nexus/public
-      - ./nextjs-nexus/stories:/www/nextjs-nexus/stories
       - ./nextjs-nexus/prisma:/www/nextjs-nexus/prisma
       - ./nextjs-nexus/server:/www/nextjs-nexus/server
       - ./nextjs-nexus/package.json:/www/nextjs-nexus/package.json
-    command: bash -c "yarn dev"
     ports:
       - 3000:3000

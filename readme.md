@@ -24,6 +24,14 @@ cp coturn/turnserver.conf.sample coturn/turnserver.conf
 
 ## Start dev
 
+### set DOCKER_BUILDKIT=0
+
+https://github.com/moby/buildkit/issues/978#issuecomment-686420433
+
+```sh
+export DOCKER_BUILDKIT=0
+```
+
 ### First start
 
 ```
