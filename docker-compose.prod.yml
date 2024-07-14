@@ -23,7 +23,7 @@ services:
     build:
       args: 
         - ENV_MODE=production
-    command: bash -c "yarn start"
+    command: npm run start
 
   rtcmultyconnection:
     restart: always

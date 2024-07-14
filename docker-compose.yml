@@ -52,7 +52,7 @@ services:
       - DATABASE_URL=${NEXTJS_DATABASE_URL}
       - SUDO_PASSWORD=${NEXTJS_SUDO_PASSWORD}
       - ENV_MODE=development
-    command: bash -c "yarn dev"
+    command: npm run dev
 
 
   rtcmultyconnection:
