@@ -24,7 +24,7 @@ services:
     build:
       context: ./caddy
     volumes:
-      - ./caddy/${CADDY_FILE:-Caddyfile}:/etc/Caddyfile
+      - ./caddy/${CADDY_FILE:-Caddyfile}:/etc/caddy/Caddyfile
 
   
   # mail-server

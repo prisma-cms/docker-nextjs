@@ -1,34 +1,9 @@
-0.0.0.0 0.0.0.0:80 {
-    tls off
-    gzip
+# {
+#     debug
+# }
 
-    # log   / stdout  "{upstream} {combined}  UPSTREAM: {upstream} REWRITE: {rewrite_uri} TOKEN: {>X-App-Token} COOKIE:{~AppSession}\n"
-   
-    proxy / nextjs-nexus:3000 {
-        transparent
-        websocket
-        # header_upstream Connection {>Connection}
-        # header_upstream Upgrade {>Upgrade}
-    }
-}
+# https://caddy.community/t/wildcard-get-subdomain-name-to-reverse-proxy/19626/4
+http://:2015 http://:80 {
 
-
-0.0.0.0:2017 {
-    tls off
-    gzip
-    proxy / pma:80 {
-        transparent
-        websocket
-    }
-}
-
-
-0.0.0.0/socket.io/ 0.0.0.0:80/socket.io/ {
-    tls off
-    gzip
-
-    proxy / rtcmultyconnection:9001/socket.io/ {
-        transparent
-        websocket
-    }
+	reverse_proxy nextjs-nexus:3000
 }
